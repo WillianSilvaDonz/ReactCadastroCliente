@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 function addClienteAction(cliente){
@@ -12,35 +12,36 @@ export default function ClientesForm() {
     const [ Local, setLocal ] = useState("Chapeco");
     const [ cliente, setCliente] = useState({});
 
-    function addCliente(event){
+    const addCliente = (event) =>{
         event.preventDefault();
-        setCliente({ 
-            Nome,
-            Idade,
-            Local
-        });
 
-        dispatch(addClienteAction(cliente));
-    }
+        dispatch(addClienteAction({ Nome, Idade, Local }));
+    };
 
     return (
         <div>
-            <h2>Cadastro !</h2>
-            <form onSubmit={addCliente} >
-                <label>
-                    Nome:
-                    <input type="text" value={Nome} onChange={ (e)=>setNome(e.target.value) } />
-                </label>
-                <label>
-                    Idade:
-                    <input type="number" value={Idade} onChange={ (e)=>setIdade(e.target.value) } />
-                </label>
-                <label>
-                    Local:
-                    <input type="text" value={Local} onChange={ (e)=>setLocal(e.target.value) } />
-                </label>
-                <input type="submit" value="Enviar" />
-            </form>
+            <div className="jumbotron">
+                <h1 className="display-4 text-center">Cadastro!</h1>
+                <div className="row justify-content-center">
+                    <div className="col-12 col-md-6">
+                        <form onSubmit={addCliente} >
+                            <div className="form-group">
+                                <label>Nome</label>
+                                <input type="text" id="nome" className="form-control" value={Nome} onChange={ (e)=>setNome(e.target.value) } aria-describedby="nomeHelp" placeholder="Nome" />
+                            </div>
+                            <div className="form-group">
+                                <label>Idade</label>
+                                <input type="number" id="idade" className="form-control" value={Idade} onChange={ (e)=>setIdade(e.target.value) } aria-describedby="nomeHelp" placeholder="Idade" />
+                            </div>
+                            <div className="form-group">
+                                <label>Local</label>
+                                <input type="text" className="form-control" value={Local} onChange={ (e)=>setLocal(e.target.value) } aria-describedby="nomeHelp" placeholder="Local" />
+                            </div>
+                            <button type="submit" className="btn btn-primary">Cadastrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
