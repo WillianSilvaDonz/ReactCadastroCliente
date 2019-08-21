@@ -1,21 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-
-function addClienteAction(cliente){
-    return { type: 'ADD_CLIENTE', cliente };
-}
+import * as actionCliente from '../../store/action';
 
 export default function ClientesForm() {
     const dispatch = useDispatch();
     const [ Nome, setNome ] = useState("");
     const [ Idade, setIdade ] = useState(0);
     const [ Local, setLocal ] = useState("Chapeco");
-    const [ cliente, setCliente] = useState({});
 
     const addCliente = (event) =>{
         event.preventDefault();
 
-        dispatch(addClienteAction({ Nome, Idade, Local }));
+        dispatch(actionCliente.addClienteAction({ Nome, Idade, Local }));
     };
 
     return (
